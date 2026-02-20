@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: 533267351303.dkr.ecr.us-east-1.amazonaws.com/backend
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: mysql-svc
+        - name: DB_USERNAME
+          value: admin
+        - name: DB_PASSWORD
+          value: Devops123
+        - name: DB_PORT
+          value: "3306"
